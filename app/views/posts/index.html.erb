@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<%= form_with(url: posts_path, method: "get") do %>
+  <%= select_tag :preference,
+                 options_for_select(
+                   [
+                     %w[Newest newest],
+                     %w[Oldest oldest]
+                   ],
+                   @default_selected),
+                 onchange: 'this.form.submit();' %>
+<% end %>
+
+<h1>Posts</h1>
+<%= render "shared/sessions" %>
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+    <p>
+      <%= link_to "Show this post", post %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New post", new_post_path %>
